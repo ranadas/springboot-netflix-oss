@@ -12,5 +12,6 @@
     <modules>
         <module>eur-svr</module>
         <module>user-service</module>
+        <module>web-appl</module>
     </modules>
 </project>

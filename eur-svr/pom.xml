@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>eur-svr</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Spring Boot Eureka server</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
