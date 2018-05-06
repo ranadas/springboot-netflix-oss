@@ -1,0 +1,1 @@
+Spring mvc that accepts enum & replies with enum
