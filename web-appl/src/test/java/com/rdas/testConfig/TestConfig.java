@@ -14,8 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
 public class TestConfig {
 
     @Bean
-    public ObjectMapper objectMapper () {
+    public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         return objectMapper;
     }

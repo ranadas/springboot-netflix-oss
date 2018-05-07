@@ -12,7 +12,7 @@ import java.util.List;
         url = "${user.service.url}"
 )
 public interface PersonRestClient {
-
+    //TODO : check for empty/null
     @GetMapping("/persons")
-    public List<Person> getPersons();
+    List<Person> getPersons();
 }

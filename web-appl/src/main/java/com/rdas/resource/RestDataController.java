@@ -29,6 +29,11 @@ public class RestDataController {
     @Autowired
     private PersonFeignClient personFeignClient;
 
+//    @Autowired
+//    public RestDataController (PersonRestClient restClient, PersonFeignClient feignClient) {
+//        this.personRestClient=restClient;
+//        this.personFeignClient=feignClient;
+//    }
 
     @PostConstruct
     public void init() {
