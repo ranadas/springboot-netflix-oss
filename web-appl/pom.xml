@@ -8,7 +8,7 @@
     <artifactId>web-appl</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>user-service</name>
+    <name>web-appl</name>
     <description>Spring Boot web application</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
