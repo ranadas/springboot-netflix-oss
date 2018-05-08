@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,8 +37,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @ContextConfiguration(classes = {TestConfig.class})
 public class PersonControllerSpringIntegrationTest {
 
+    @Qualifier("testOMapper")
     @Autowired
-    private ObjectMapper mapper;
+    private ObjectMapper testOMapper;
 
     @Autowired
     private InMemoryPersonService inMemoryPersonService;
@@ -66,9 +68,27 @@ public class PersonControllerSpringIntegrationTest {
 
         //then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        //TODO :
-//        Optional<Person> actual = mapper.readValue(response.getContentAsString(), new TypeReference<Optional<Person>>() {
-//        });
-//        System.out.println(actual);
+        Optional<Person> actual = testOMapper.readValue(response.getContentAsString(), new TypeReference<Optional<Person>>() {});
+        assertThat(actual.get().getId()).isEqualTo(5);
+
+    }
+
+
+    @Test
+    public void assertThatIfIdNotFound() throws Exception {
+        //when
+        MockHttpServletResponse response = mockMvc.perform(
+                get("/personbyid/{id}", 15)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                        .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andDo(print())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andReturn()
+                .getResponse();
+
+        //then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        Optional<Person> actual = testOMapper.readValue(response.getContentAsString(), new TypeReference<Optional<Person>>() {});
+        assertThat(actual.isPresent()).isEqualTo(false);
     }
 }
