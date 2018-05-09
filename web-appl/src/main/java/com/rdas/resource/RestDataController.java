@@ -3,16 +3,17 @@ package com.rdas.resource;
 import com.rdas.model.Person;
 import com.rdas.model.PersonType;
 import com.rdas.restclient.PersonFeignClient;
+import com.rdas.restclient.PersonHttpClient;
 import com.rdas.restclient.PersonRestClient;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.beans.PropertyEditorSupport;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,9 @@ public class RestDataController {
     @Autowired
     private PersonFeignClient personFeignClient;
 
+    @Autowired
+    private PersonHttpClient personHttpClient;
+
 //    @Autowired
 //    public RestDataController (PersonRestClient restClient, PersonFeignClient feignClient) {
 //        this.personRestClient=restClient;
@@ -41,7 +45,8 @@ public class RestDataController {
     }
 
     @GetMapping("/persons")
-    public List<Person> getPersons() {
+    public List<Person> getPersons() throws IOException {
+        personHttpClient.getPersons();
         return personRestClient.getPersons();
     }
 
@@ -55,4 +60,14 @@ public class RestDataController {
         return personFeignClient.getPersonsById(id);
     }
 
+    @InitBinder
+    public void initBinder(final WebDataBinder webdataBinder) {
+        webdataBinder.registerCustomEditor(PersonType.class, new PersonTypeConverter());
+    }
+
+    public class PersonTypeConverter extends PropertyEditorSupport {
+        public void setAsText(final String text) throws IllegalArgumentException {
+            setValue(PersonType.fromValue(text));
+        }
+    }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rdas.model.Person;
 import com.rdas.model.PersonType;
 import com.rdas.restclient.PersonFeignClient;
+import com.rdas.restclient.PersonHttpClient;
 import com.rdas.restclient.PersonRestClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -44,6 +46,9 @@ public class RestDataControllerMockTest {
 
     @Mock
     private PersonFeignClient personFeignClient;
+
+    @Mock
+    private PersonHttpClient personHttpClient;
 
     @InjectMocks
     private RestDataController restDataController;

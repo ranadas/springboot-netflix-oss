@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rdas.model.Person;
 import com.rdas.model.PersonType;
 import com.rdas.restclient.PersonFeignClient;
+import com.rdas.restclient.PersonHttpClient;
 import com.rdas.restclient.PersonRestClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +42,9 @@ public class RestDataControllerMockMvcWithContextTest {
 
     @MockBean
     private PersonFeignClient personFeignClient;
+
+    @MockBean
+    private PersonHttpClient personHttpClient;
 
     // This object will be magically initialized by the initFields method below.
 //    private JacksonTester<SuperHero> jsonSuperHero;

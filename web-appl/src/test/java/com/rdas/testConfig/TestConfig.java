@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
+
 /**
  * Created by rdas on 22/04/2018.
  */
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class TestConfig {
 
     @Bean
-    public ObjectMapper objectMapper() {
+    public ObjectMapper testOMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
