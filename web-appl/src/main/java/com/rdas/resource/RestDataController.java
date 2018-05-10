@@ -5,6 +5,7 @@ import com.rdas.model.PersonType;
 import com.rdas.restclient.PersonFeignClient;
 import com.rdas.restclient.PersonHttpClient;
 import com.rdas.restclient.PersonRestClient;
+import com.rdas.restclient.PersonRestTemplateClient;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class RestDataController {
     @Autowired
     private PersonHttpClient personHttpClient;
 
+    @Autowired
+    private PersonRestTemplateClient personRestTemplateClient;
+
 //    @Autowired
 //    public RestDataController (PersonRestClient restClient, PersonFeignClient feignClient) {
 //        this.personRestClient=restClient;
@@ -46,8 +50,9 @@ public class RestDataController {
 
     @GetMapping("/persons")
     public List<Person> getPersons() throws IOException {
-        personHttpClient.getPersons();
-        return personRestClient.getPersons();
+        return personRestTemplateClient.getPersons();
+//        personHttpClient.getPersons();
+//        return personRestClient.getPersons();
     }
 
     @GetMapping("/personsByType")
