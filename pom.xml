@@ -14,5 +14,6 @@
         <module>eur-svr</module>
         <module>user-service</module>
         <module>web-appl</module>
+        <module>functional-reactive</module>
     </modules>
 </project>
