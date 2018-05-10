@@ -42,15 +42,12 @@ public class PersonRestTemplateClientTest {
     public void setUp() throws Exception {
         peoples = new ArrayList<>();
         peoples.add(Person.builder().type(PersonType.MALE).age(21).name("Raja").id(24).build());
+        peoples.add(Person.builder().id(1).name("Rana").age(50).type(PersonType.MALE).build());
+        peoples.add(Person.builder().id(1).name("Jennifer").age(49).type(PersonType.FEMALE).build());
         String detailsString = testOMapper.writeValueAsString(peoples);
 
         this.server.expect(MockRestRequestMatchers.requestTo("/persons"))
                 .andRespond(withSuccess(detailsString, MediaType.APPLICATION_JSON));
-
-
-        //peoples.add(Person.builder().id(1).name("Rana").age(50).type(PersonType.MALE).build());
-//        peoples.add(Person.builder().id(1).name("Jennifer").age(49).type(PersonType.FEMALE).build());
-
     }
 
     @Test
@@ -68,6 +65,13 @@ public class PersonRestTemplateClientTest {
         System.out.println(persons);
 //        assertThat(details.getLogin()).isEqualTo("john");
 //        assertThat(details.getName()).isEqualTo("John Smith");
+    }
+
+
+    @Test
+    public void whenCallingGetUserDetails()  throws Exception {
+        List<Person> persons = this.client.getPersonsByType(PersonType.MALE);
+        System.out.println(persons);
     }
 
 

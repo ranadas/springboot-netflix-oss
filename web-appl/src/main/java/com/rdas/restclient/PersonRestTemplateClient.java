@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PersonRestTemplateClient {
@@ -35,7 +35,12 @@ public class PersonRestTemplateClient {
     }
 
     public List<Person> getPersonsByType(PersonType type) {
-        return null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", type);
+
+        ResponseEntity<Person[]> response = restTemplate.getForEntity("/persons", Person[].class, params);
+        System.out.println(Arrays.asList(response.getBody()));
+        return restTemplate.getForObject("/persons", List.class);
     }
 
     public Optional<Person> getPersonsById(Integer id) {
