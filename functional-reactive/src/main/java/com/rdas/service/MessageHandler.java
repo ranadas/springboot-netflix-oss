@@ -1,18 +1,21 @@
 package com.rdas.service;
 
 import com.rdas.model.Message;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
+@Component
 public class MessageHandler {
     private final MessageService messageService;
 
+    @Autowired
     public MessageHandler(MessageService messageService) {
         this.messageService = messageService;
     }

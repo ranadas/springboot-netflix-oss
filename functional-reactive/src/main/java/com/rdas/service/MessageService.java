@@ -1,12 +1,14 @@
 package com.rdas.service;
 
 import com.rdas.model.Message;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.UUID;
 
+@Service
 public class MessageService {
     public Mono<Message> getMessage() {
         return Mono.just(new Message(UUID.randomUUID().toString(), "Hello World!"));
