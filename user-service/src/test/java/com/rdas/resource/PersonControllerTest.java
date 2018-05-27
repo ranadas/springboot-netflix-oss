@@ -78,6 +78,7 @@ public class PersonControllerTest {
                         .accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andDo(print())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(5)))
                 .andReturn()
                 .getResponse();
 
