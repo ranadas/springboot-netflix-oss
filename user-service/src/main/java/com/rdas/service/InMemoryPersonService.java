@@ -68,4 +68,16 @@ public class InMemoryPersonService {
             return false;
         }
     }
+
+    public Optional<Person> getPersonBy(Integer id, PersonType personType) {
+        log.info("Finding person by id {} and type {}" , id, personType);
+
+        Optional<Person> match = persons.stream()
+                .filter((person) -> person.getId() == id)
+                .filter(p -> p.getType() == personType)
+                .reduce((u, v) -> {
+                    throw new IllegalStateException("More than one ID found");
+                });
+        return match;
+    }
 }

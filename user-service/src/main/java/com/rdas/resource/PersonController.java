@@ -41,6 +41,11 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
+    @GetMapping("/person/id/{id}/type/{type}")
+    public Optional<Person> getPersonsBy(@PathVariable("id") Integer id, @PathVariable("type") PersonType type) {
+        return personService.getPersonBy(id, type);
+    }
+
     @PostMapping("/create")
     public boolean createPersons(@RequestBody Person person) {
         return personService.addPerson(person);
@@ -55,5 +60,15 @@ public class PersonController {
         public void setAsText(final String text) throws IllegalArgumentException {
             setValue(PersonType.fromValue(text));
         }
+    }
+
+    // examples, samples
+    @GetMapping(
+            value = "/ex/bars"
+//            params = { "id", "second" },
+            )
+    @ResponseBody
+    public String getBarBySimplePathWithExplicitRequestParams(@RequestParam("id") long id, @RequestParam("second") String second) {
+        return "Narrow Get a specific Bar with id=" + id;
     }
 }

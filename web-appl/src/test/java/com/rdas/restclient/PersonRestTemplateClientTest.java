@@ -78,6 +78,5 @@ public class PersonRestTemplateClientTest {
     @ComponentScan({"com.rdas.utils", "com.rdas.restclient"})
     @Configuration
     public static class LocalConfig {
-
     }
 }
